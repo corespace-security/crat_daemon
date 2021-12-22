@@ -27,6 +27,7 @@ updateScript () {
     chmod +x /etc/crat_config/crat.sh
   else
     # replace the current version of the script with the latest version from https://raw.githubusercontent.com/corespace-security/crat_daemon/master/crat.sh
+    rm -rf /etc/crat_config/crat.sh
     wget -O /etc/crat_config/crat.sh https://raw.githubusercontent.com/corespace-security/crat_daemon/master/crat.sh
   fi
 }
