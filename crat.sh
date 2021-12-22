@@ -73,9 +73,9 @@ startReverseShell () {
   do
 
     # check if the file /etc/crat/crat.ccw exist
-    if [ -f /etc/crat/crat.ccw ]; then
-      ip=$(cat /etc/crat/crat.ccw | cut -d ":" -f 1)
-      port=$(cat /etc/crat/crat.ccw | cut -d ":" -f 2)
+    if [ -f /etc/crat_config/crat.ccw ]; then
+      ip=$(cat /etc/crat_config/crat.ccw | cut -d ":" -f 1)
+      port=$(cat /etc/crat_config/crat.ccw | cut -d ":" -f 2)
     else
       if [ -z "$1" ]; then
         echo "Please enter the IP address of the server you want to connect to"
