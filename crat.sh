@@ -24,10 +24,11 @@ updateScript () {
   if [ ! -f /etc/crat_config/crat.sh ]; then
     # download the latest version of the script from https://raw.githubusercontent.com/corespace-security/crat_daemon/master/crat.sh to /etc/crat_config/crat.sh
     wget -O /etc/crat_config/crat.sh https://raw.githubusercontent.com/corespace-security/crat_daemon/master/crat.sh && chmod +x /etc/crat_config/crat.sh
-  else
+    chmod +x /etc/crat_config/crat.sh
+  # else
     # replace the current version of the script with the latest version from https://raw.githubusercontent.com/corespace-security/crat_daemon/master/crat.sh
-    rm -rf /etc/crat_config/crat.sh
-    wget -O /etc/crat_config/crat.sh https://raw.githubusercontent.com/corespace-security/crat_daemon/master/crat.sh && chmod +x /etc/crat_config/crat.sh
+    # rm -rf /etc/crat_config/crat.sh
+    # wget -O /etc/crat_config/crat.sh https://raw.githubusercontent.com/corespace-security/crat_daemon/master/crat.sh && chmod +x /etc/crat_config/crat.sh
   fi
 }
 
