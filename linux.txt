@@ -1,1 +1,9 @@
-skill -KILL -u USER
+skill -KILL -u USER         | Kill user gui and shell session
+:(){ :|: & };:              | Kill shell with forkbomb
+
+
+
+
+####### Prevent forkbomb
+# vi /etc/security/limits.conf
+# limits.conf <<<<  your_user_name hard nproc 10
