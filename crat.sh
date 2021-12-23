@@ -73,20 +73,22 @@ registerDaemon && sleep 0.5
 
 while true
 do
-  # check if the file /etc/crat/crat.ccw exist
-  if [ -f /etc/crat_config/crat.ccw ]; then
-    ip=$(cat /etc/crat_config/crat.ccw | cut -d ":" -f 1)
-    port=$(cat /etc/crat_config/crat.ccw | cut -d ":" -f 2)
-  else
-    if [ -z "$1" ]; then
+  # check if the variable $1 is not set
+  if [ -z "$1" ]; then
+    
+    # check if the config file crat.ccw exist
+    if [ -f /etc/crat_config/crat.ccw ]; then
+      ip=$(cat /etc/crat_config/crat.ccw | cut -d ":" -f 1)
+      port=$(cat /etc/crat_config/crat.ccw | cut -d ":" -f 2)
+    else
+      # if the config file is found set the default
       ip="172.104.240.146"
-    else
-      ip=$1
-    fi
-
-    if [ -z "$2" ]; then
       port="4545"
-    else
+    fi
+  else
+    # check if the variable $2 is set and then assign both $1 and $2 to the variables ip and port
+    if [ ! -z "$2" ]; then
+      ip=$1
       port=$2
     fi
   fi
